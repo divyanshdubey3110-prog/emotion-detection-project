@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Detection</title>
+</head>
+<body>
+    <h1>Emotion Detection Application</h1>
+
+    <label for="textToAnalyze">Enter text:</label>
+    <input
+        type="text"
+        id="textToAnalyze"
+        placeholder="Type a sentence here"
+    >
+
+    <button onclick="runEmotionDetection()">
+        Run Emotion Detection
+    </button>
+
+    <h3 id="system_response"></h3>
+
+    <script>
+        function runEmotionDetection() {
+            const text = document.getElementById("textToAnalyze").value;
+
+            fetch(
+                "/emotionDetector?textToAnalyze=" +
+                encodeURIComponent(text)
+            )
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("system_response").innerHTML = data;
+                });
+        }
+    </script>
+</body>
+</html>
